@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 1000px;
+            height: 800px;
+            border: 1px solid silver;
+            position: relative;
+            margin: 0 auto;
+        }
+        #box div{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background: blue;
+            opacity: 0.8;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+            color: #fff;
+        }
+        #box span{
+            display: block;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            opacity: 0.7;
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+</div>
+</body>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script>
+    var box = document.getElementById("box"),
+        obj = box.getElementsByTagName("div");
+
+    var moveStatus = 0;
+    for(let i = 0; i<obj.length;i++){
+        obj[i].style.left = (obj.length-1-i)*50+"px";
+    }
+    function oBox_move(){
+        for(let i=obj.length-1;i>0;i--){
+            obj[i].style.left = obj[i-1].offsetLeft+"px";
+            obj[i].style.top = obj[i-1].offsetTop+"px";
+        }
+    }
+    document.onkeydown = function(e){
+        switch(e.key){
+            case "w": moveStatus = 3;break;
+            case "s": moveStatus = 1;break;
+            case "a": moveStatus = 2;break;
+            case "d": moveStatus = 0;break;
+        }
+    }
+    function movePerson(){
+    
+        interval = setInterval(function(e){
+
+            if(hitSelf()){clearInterval(interval)}
+
+
+            switch(moveStatus){
+                case 0:
+                if(obj[0].offsetLeft<950){
+                    oBox_move();
+                    obj[0].style.left = obj[0].offsetLeft + 50 + "px";
+                }else{
+                    document.onkeydown = null;
+                    }
+                break;
+
+                case 1:
+                if(obj[0].offsetTop<750){
+                    oBox_move();
+                    obj[0].style.top = obj[0].offsetTop + 50 + "px";
+                }else{
+                    document.onkeydown = null;
+                }
+                break;
+
+                case 2:
+                if(obj[0].offsetLeft>0){
+                    oBox_move();
+                    obj[0].style.left = obj[0].offsetLeft - 50 + "px";
+                }else{
+                    document.onkeydown = null;
+                }
+                break;
+
+                case 3:
+                if(obj[0].offsetTop>0){
+                    oBox_move();
+                    obj[0].style.top = obj[0].offsetTop - 50 + "px";
+                }else{
+                    document.onkeydown = null;
+                }
+                break;
+            }
+            
+            var food = box.getElementsByTagName("span");
+            if(food[0] != undefined && obj[0].offsetLeft == food[0].offsetLeft&&obj[0].offsetTop == food[0].offsetTop){
+                let obj = $('<div>5</div>');
+                obj.css({
+                    "left":"-100px",
+                    "top":"-100px",
+                })
+                $("#box").append(obj);
+                box.removeChild(food[0]);
+                createFood();
+            }
+        },500)
+    }
+    function createFood(){
+        let obj = $('<span></span>');
+        obj.css({
+            "left":Math.round(Math.random()*10)*50+"px",
+            "top":Math.round(Math.random()*8)*50+"px",
+        });
+        $('#box').append(obj)
+    }
+    function hitSelf(){
+        for(let i = 1; i<obj.length-1;i++){
+            if(obj[0].offsetLeft==obj[i].offsetLeft&&obj[0].offsetTop==obj[i].offsetTop){
+                return true;
+            }
+        }
+        return false;
+    }
+    createFood();
+    movePerson();
+</script>
+</html>
