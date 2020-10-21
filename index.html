@@ -21,7 +21,8 @@
             top: 0;
             width: 50px;
             height: 50px;
-            background: blue;
+            border-radius: 50%;
+            background: rgba(255, 68, 0, 0.7);
             opacity: 0.8;
             text-align: center;
             line-height: 50px;
@@ -34,16 +35,16 @@
             width: 50px;
             height: 50px;
             opacity: 0.7;
-            background-color: tomato;
+            background-color: rgba(253, 0, 0, 0.7);
         }
     </style>
 </head>
 <body>
 <div id="box">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
+    <div style="background-color: teal;"></div>
+    <div></div>
+    <div></div>
+    <div></div>
 </div>
 </body>
 <script src="js/jquery-3.5.1.min.js"></script>
@@ -116,7 +117,7 @@
             
             var food = box.getElementsByTagName("span");
             if(food[0] != undefined && obj[0].offsetLeft == food[0].offsetLeft&&obj[0].offsetTop == food[0].offsetTop){
-                let obj = $('<div>5</div>');
+                let obj = $('<div></div>');
                 obj.css({
                     "left":"-100px",
                     "top":"-100px",
