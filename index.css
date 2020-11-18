@@ -38,7 +38,7 @@ body{
 }
 
 #button_box{
-    margin: 2em auto;
+    margin:0 auto;
     display: flex;
     width: 30%;
 }
@@ -50,6 +50,10 @@ button{
 
 #button_box>span{
     line-height: 2em;
+}
+
+#score{
+    margin-left: 1em;
 }
 
 #control_button{
@@ -81,13 +85,14 @@ button{
     
     #button_box{
         width: 60%;
+        margin-bottom: 0;
     }
 
     #control_button{
         display: flex;
         flex-direction: row;
         width: 200px;
-        height: 200px;
+        height: 150px;
         margin: 0 auto;
         align-items: center;
         justify-content: center;
@@ -104,11 +109,12 @@ button{
     }
 
     #control_button>div>button:nth-child(1){
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
     #control_button>div>button:nth-child(2){
-        margin-top: 2em;
+        margin-top: 1em;
     }
+
 }
 @media (min-width: 360px) and (max-width: 767px){
     #box{
@@ -124,11 +130,11 @@ button{
         display: flex;
         flex-direction: row;
         width: 200px;
-        height: 200px;
+        height: 150px;
         margin: 0 auto;
         align-items: center;
         justify-content: center;
-        gap: 2em;
+        gap: 1em;
     }
 
     #control_button>*{
@@ -141,10 +147,10 @@ button{
     }
 
     #control_button>div>button:nth-child(1){
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
     #control_button>div>button:nth-child(2){
-        margin-top: 2em;
+        margin-top: 1em;
     }
 }
 

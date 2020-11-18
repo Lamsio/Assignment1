@@ -78,7 +78,7 @@
                     'height':obj_snake.css('width')
                 })
                 $("#box").append(obj);
-                $("#score").val(parseInt($("#score").val())+1)
+                $("#score").text(parseInt($("#score").text())+1)
                 box.removeChild(obj_food[0]);
                 createFood();
             }
@@ -138,7 +138,7 @@
                     case"D":case "d": moveStatus = 0;break;
                 }
             };
-            $('#score').val(0);
+            $('#score').text(0);
             moveStatus = 0;
             createFood();
             move();
