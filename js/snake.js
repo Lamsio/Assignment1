@@ -1,10 +1,11 @@
 (function(window){
 
-    alert("規則\n食物在區域内任意地點刷新\n操作\nW/A/S/D => 上/左/下/右\n條件\n贏: 做夢\n輸: 咬自己/撞墻");
+    alert("Rule:\nFoods will be randomly spawned in the area\nGet as much food as you can\n\nHow to Control\nW/A/S/D");
     var box = document.getElementById("box"),
         obj = box.getElementsByTagName("div");
-
+    
     var moveStatus = 0;
+    $('#score').val(0);
     function snakebody_move(){
         for(let i=obj.length-1;i>0;i--){
             obj[i].style.left = obj[i-1].offsetLeft+"px";
@@ -26,7 +27,7 @@
 
         interval = setInterval(function(e){
             if(hitSelf()){
-                clearInterval(interval);alert("你輸了");
+                end();
             }else{
                 switch(moveStatus){
                     case 0:
@@ -77,6 +78,7 @@
                     'height':obj_snake.css('width')
                 })
                 $("#box").append(obj);
+                $("#score").val(parseInt($("#score").val())+1)
                 box.removeChild(obj_food[0]);
                 createFood();
             }
@@ -117,8 +119,49 @@
 
     function end(){
         document.onkeydown = null;
-        clearInterval(interval);alert("你輸了");
+        $('#box>span').remove();
+        $('#restart').removeAttr('disabled');
+        clearInterval(interval);alert("Game over!");
+        $('#restart').css('display','block')
     }
+
+    function restart(){
+        $('#restart').on('click',function(){
+            $(this).attr('disabled','disabled');
+            $('#box>div:gt(0)').remove();
+            $('#box>div:eq(0)').css('left','0px').css('top','0px');
+            document.onkeydown = function(e){
+                switch(e.key){
+                    case"W":case "w": moveStatus = 3;break;
+                    case"S":case "s": moveStatus = 1;break;
+                    case"A":case "a": moveStatus = 2;break;
+                    case"D":case "d": moveStatus = 0;break;
+                }
+            };
+            $('#score').val(0);
+            moveStatus = 0;
+            createFood();
+            move();
+        });
+        
+    }
+
+    function mobile_control(){
+        $('#up').on('click',function(){
+            moveStatus = 3;
+        });
+        $('#left').on('click',function(){
+            moveStatus = 2;
+        });
+        $('#right').on('click',function(){
+            moveStatus = 0;
+        });
+        $('#down').on('click',function(){
+            moveStatus = 1;
+        });
+    }   
+        mobile_control();
+        restart();
         setSnake();
         createFood();
         move();
