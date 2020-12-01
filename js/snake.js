@@ -1,6 +1,6 @@
 (function(window){
 
-    alert("Rule:\nFoods will be randomly spawned in the area\nGet as much food as you can\n\nHow to Control\nW/A/S/D");
+    alert("Rule:\nFoods will be randomly spawned in the area\nGet as much food as you can\n\nHow to Control\nW/A/S/D or ↑/↓/←/→");
     var box = document.getElementById("box"),
         obj = box.getElementsByTagName("div");
     
