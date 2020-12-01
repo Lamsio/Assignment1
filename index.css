@@ -77,6 +77,10 @@ button{
     background-image: url('./img/down.png');
     background-size: cover;
 }
+
+#msg{
+    margin: 0 auto;
+}
 @media (min-width: 320px) and (max-width: 359px){
     #box{
         width: 300px;
